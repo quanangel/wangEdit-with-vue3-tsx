@@ -26,8 +26,8 @@ export default defineComponent({
 
       // update [parent component content
       Object.assign(instance.config, {
-        onchange() {
-          ctx.emit('change_content', instance.txt.html())
+        onblur(newHtml: any) {
+          ctx.emit('change_content', newHtml)
         }
       })
       // create editor
@@ -43,9 +43,8 @@ export default defineComponent({
     })
 
     const watchContent = watchEffect(() => {
-      content.value = props.content
       if (instance) {
-        instance.txt.html(content.value)
+        instance.txt.html(props.content)
       }
     })
 
